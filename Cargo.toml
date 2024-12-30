@@ -1,0 +1,16 @@
+[package]
+name = "first_project"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+crossterm = "0.28.1"
+ratatui = "0.29.0"
+
+[[bin]]
+name = "counter_terminal"
+path = "src/counter_terminal.rs"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"

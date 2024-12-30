@@ -1,0 +1,1 @@
+/mnt/c/Users/tycon/Documents/RustPrograms/first_project/target/debug/counter_terminal: /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/counter_terminal.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/first.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/lib.rs

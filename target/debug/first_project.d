@@ -1,0 +1,1 @@
+/mnt/c/Users/tycon/Documents/RustPrograms/first_project/target/debug/first_project: /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/epic.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/lib.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/main.rs

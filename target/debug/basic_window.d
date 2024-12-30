@@ -1,0 +1,1 @@
+/mnt/c/Users/tycon/Documents/RustPrograms/first_project/target/debug/basic_window: /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/epic.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/lib.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/test.rs /mnt/c/Users/tycon/Documents/RustPrograms/first_project/src/weather_app.rs
