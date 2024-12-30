@@ -11,10 +11,7 @@ use ratatui::{
 pub struct WeatherApp;
 
 impl WeatherApp {
-    pub fn new() -> Self {
-        WeatherApp
-    }
-
+    // Render the weather app
     pub fn render(&self, frame: &mut Frame, area: ratatui::layout::Rect) {
         let title = Line::from(" Weather App ".bold());
         let block = Block::default()

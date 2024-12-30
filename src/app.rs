@@ -18,7 +18,6 @@ use crate::{
 #[derive(Debug, Default)]
 pub struct App {
     exit: bool,
-    tabs: Vec<String>,
     current_tab: usize,
     weather_app: WeatherApp,
     counter_app: CounterApp,
@@ -110,6 +109,15 @@ impl App {
                 self.current_tab = 2;
             }
             _ => {},
+        }
+
+        // If current tab is counter_tab
+        if self.current_tab == 1 {
+            match key_event.code {
+                KeyCode::Right => self.counter_app.increment_counter(),
+                KeyCode::Left => self.counter_app.decrement_counter(),
+                _ => {},
+            }
         }
     }
 
