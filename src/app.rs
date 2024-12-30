@@ -4,7 +4,7 @@ use ratatui::{
     widgets::{Paragraph, Borders, Block, Tabs},
     layout::{Layout, Constraint, Direction},
     symbols::border,
-    style::Stylize,
+    style::{Style, Stylize, Color},
     text::Line,
     DefaultTerminal,
     Frame,
@@ -66,7 +66,11 @@ impl App {
             .split(area);
 
         // Setup tabs
-        let tabs = Tabs::new(vec!["Tab 1".blue(), "Tab 2".blue()])
+        let tab_titles = vec!["Tab 1".blue(), "Tab 2".blue(), "Tab 3".blue()];
+        let tabs = Tabs::new(tab_titles)
+            .select(self.current_tab)
+            .highlight_style(Style::default().fg(Color::Blue).bg(Color::Gray)) 
+            .style(Style::default().white())
             .padding("", "")
             .divider(" ");
         frame.render_widget(tabs, layout[1]);
