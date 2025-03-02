@@ -108,4 +108,3 @@ mod tests {
     }
     // ANCHOR_END: handle_key_event test
 }
-// ANCHOR_END: tests
