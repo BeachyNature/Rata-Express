@@ -1,5 +1,3 @@
-use std::io;
-use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::{
     style::Stylize,
     symbols::border,
@@ -12,13 +10,13 @@ use ratatui::{
 #[derive(Debug, Default, Clone, Copy)]
 pub struct CounterApp {
     counter: i8,
-    exit: bool,
 }
 
 impl CounterApp {
 
     // Render the counter app
-    pub fn render(self, frame: &mut Frame, area: ratatui::layout::Rect) {
+    pub fn render(&self, frame: &mut Frame, area: ratatui::layout::Rect) {        
+        // Title Setup
         let title = Line::from(" Counter App Tutorial ".bold());
         let instructions = Line::from(vec![
             " Decrement ".into(),
@@ -47,35 +45,13 @@ impl CounterApp {
         frame.render_widget(paragraph, area);
     }
 
-    /// updates the application's state based on user input
-    fn handle_events(&mut self) -> io::Result<()> {
-        match event::read()? {
-            Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
-                self.handle_key_event(key_event)
-            }
-            _ => {}
-        };
-        Ok(())
-    }
-
-    fn handle_key_event(&mut self, key_event: KeyEvent) {
-        match key_event.code {
-            KeyCode::Char('q') => self.exit(),
-            KeyCode::Left => self.decrement_counter(),
-            KeyCode::Right => self.increment_counter(),
-            _ => {}
-        }
-    }
-
-    fn exit(&mut self) {
-        self.exit = true;
-    }
-
-    fn increment_counter(&mut self) {
+    // Increment counter
+    pub fn increment_counter(&mut self) {
         self.counter += 1;
     }
-
-    fn decrement_counter(&mut self) {
+    
+    // Decrement counter
+    pub fn decrement_counter(&mut self) {
         self.counter -= 1;
     }
 }
@@ -132,4 +108,3 @@ mod tests {
     }
     // ANCHOR_END: handle_key_event test
 }
-// ANCHOR_END: tests

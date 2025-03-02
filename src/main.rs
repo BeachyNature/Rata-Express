@@ -7,16 +7,18 @@ use app::App;
 use std::io;
 use ratatui;
 
-// Developed Main Termianl window initialization
-//
-//
-//
+/// Developed Main Termianl window initialization
+///
+/// WIP
+///
 fn main() -> io::Result<()> {
-    // Initialize the terminal for ratatui
+    // Setup terminal window 
+    let mut app = App::default();
     let mut terminal = ratatui::init();
     terminal.clear()?;
-
-    let app_result = App::default().run(&mut terminal);
+    
+    // Run App in default state 
+    let _ = app.run(&mut terminal);
     ratatui::restore();
-    app_result
+    Ok(())
 }

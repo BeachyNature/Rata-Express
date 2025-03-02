@@ -4,7 +4,7 @@ use ratatui::{
     widgets::{Paragraph, Borders, Block, Tabs},
     layout::{Layout, Constraint, Direction},
     symbols::border,
-    style::{Style, Stylize, Color},
+    style::Stylize,
     text::Line,
     DefaultTerminal,
     Frame,
@@ -12,23 +12,19 @@ use ratatui::{
 
 // Import local app
 use crate::{
-    tabs::{JsonApp, WeatherApp, CounterApp}
+    tabs::{weather_app}
 };
 
 #[derive(Debug, Default)]
 pub struct App {
     exit: bool,
+    tabs: Vec<String>,
     current_tab: usize,
-    json_app: JsonApp,
-    weather_app: WeatherApp,
-    counter_app: CounterApp,
+    weather_app: weather_app::WeatherApp,
 }
 
-///
-/// Starting terminal window to welcome user
-///
-///
 impl App {
+    // Draw current terminal frames
     pub fn run(&mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         while !self.exit {
             terminal.draw(|frame| self.draw(frame))?;
@@ -41,8 +37,10 @@ impl App {
     fn draw(&self, frame: &mut Frame) {
         let title = Line::from("Very Epic Child Block".bold());
         let instructions = Line::from(vec![
-            " Change Tab ".into(),
-            "<1-3>".blue().bold(),
+            " Decrement ".into(),
+            "<Left>".blue().bold(),
+            " Increment ".into(),
+            "<Right>".blue().bold(),
             " Quit ".into(),
             "<Q>".red().bold(),
         ]);
@@ -70,21 +68,21 @@ impl App {
             .split(area);
 
         // Setup tabs
-        let tab_titles = vec!["Tab 1".blue(), "Tab 2".blue(), "Tab 3".blue()];
-        let tabs = Tabs::new(tab_titles)
-            .select(self.current_tab)
-            .highlight_style(Style::default().fg(Color::Blue).bg(Color::Gray)) 
-            .style(Style::default().white())
+        // let tab_titles: Vec<Line> = self.tabs
+        let tabs = Tabs::new(vec!["Tab 1".blue(), "Tab 2".blue()])
             .padding("", "")
             .divider(" ");
         frame.render_widget(tabs, layout[1]);
 
         // Content for the selected tab
-        match self.current_tab {
+        let content = match self.current_tab {
             0 => self.weather_app.render(frame, layout[2]),
-            1 => self.counter_app.render(frame, layout[2]),
-            2 => self.json_app.render(frame, layout[2]),
-            3 => {
+            1 => {
+                let paragraph = Paragraph::new("EPIC TEST")
+                    .block(Block::default().title("Content").borders(Borders::ALL));
+                frame.render_widget(paragraph, layout[2]);
+            }
+            2 => {
                 let paragraph = Paragraph::new("Very cool")
                     .block(Block::default().title("Content").borders(Borders::ALL));
                 frame.render_widget(paragraph, layout[2]);
@@ -114,25 +112,10 @@ impl App {
             KeyCode::Char('2') => {
                 self.current_tab = 1;
             }
-            KeyCode::Char('3') => {
-                self.current_tab = 2;
-            }
             _ => {},
-        }
-
-        // If current tab is counter_tab
-        if self.current_tab == 1 {
-            match key_event.code {
-                KeyCode::Right => self.counter_app.increment_counter(),
-                KeyCode::Left => self.counter_app.decrement_counter(),
-                _ => {},
-            }
         }
     }
 
-    ///
-    /// Exits the terminal when trigger is met
-    ///
     fn exit(&mut self) {
         self.exit = true;
     }
